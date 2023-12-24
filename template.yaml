@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  balance-inquiry
+  Sample SAM Template for balance-inquiry
+Globals:
+  Function:
+    Architectures:
+      - x86_64
+    Timeout: 5
+    MemorySize: 128
+
+Resources:
+  balanceInquiry:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      PackageType: Image
+      Events:
+        CatchAll:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /balance-inquiry
+            Method: GET
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./balance-inquiry
+      Dockerfile: Dockerfile
